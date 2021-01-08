@@ -1,22 +1,8 @@
-version: 2.1
-executors:
-  node-js:
-    docker:
-      - image: node:8.10.0  
-  my-executor1:
+version: 2
+jobs:
+  build:
     docker:
       - image: cimg/ruby:2.7.1-node
-
-jobs:
-  install-node:
-    executor: node-js
-    steps:
-      - checkout
-      - run: node -v
-      - run: echo "Node Installed"
-        
-  my-job:
-    executor: my-executor1
     environment:
       BUNDLE_PATH: ~/repo/vendor/bundle 
     steps:
@@ -27,14 +13,13 @@ jobs:
             - rubygems-v1-fallback
 
       - run: sudo apt-get install python3 
-      - run: sudo apt-get update
       - run: sudo apt-get install -y python3-pip 
       - run: sudo pip3 install pipenv 
       - run: pipenv install
       - run: pipenv install Unipath
       #- run:
        #   name: Widdershins
-       #   command: pipenv run python ./z_widdershins_recursive.py
+        #  command: pipenv run python ./z_widdershins_recursive.py
       - run:
           name: Add Underscore V3.0
           command: pipenv run python ./src/api-explorer/v3-0/z_underscore_v3_0.py
@@ -51,57 +36,15 @@ jobs:
        #   name: Move From Dev Center To Slate
         #  command: pipenv run python ./z_dc_to_slate.py
       #- run:
-          #name: Adjust Tags and Content
-          #command: pipenv run python ./src/Slate-API-Explorer-Reference/slate/source/includes/z_update_swagger_tags.py
-      
-  my-job2:
-    executor: my-executor1
-    environment:
-      BUNDLE_PATH: ~/repo/vendor/bundle 
-    steps:
-      - checkout 
-      - restore_cache:
-          keys:
-            - rubygems-v1-{{ checksum "Gemfile.lock" }}
-            - rubygems-v1-fallback
-      - attach_workspace:
-          at: ./   
+       #   name: Adjust Tags and Content
+        #  command: pipenv run python ./src/Slate-API-Explorer-Reference/slate/source/includes/z_update_swagger_tags.py
       - run:
-          name: install dependencies
-          command: |
-                gem update --system
-                gem install bundler
-      - run:
-          name: Confirm NodeJS
-          command: node -v
-      - run:
-          name: Generate Fresh Slate Static Files
-          no_output_timeout: 30m
-          command: cd ./src/Slate-API-Explorer-Reference/slate && bundle install && bundle exec middleman build
-    
-  
-  
-  my-job3:
-    executor: my-executor1
-    environment:
-      BUNDLE_PATH: ~/repo/vendor/bundle 
-    steps:
-      - checkout 
-      - restore_cache:
-          keys:
-            - rubygems-v1-{{ checksum "Gemfile.lock" }}
-            - rubygems-v1-fallback
-      - attach_workspace:
-          at: ./
-      - run: sudo apt-get install python3
-      - run: sudo apt-get update 
-      - run: sudo apt-get install -y python3-pip 
-      - run: sudo pip3 install pipenv 
-      - run: pipenv install
-      - run: pipenv install Unipath
+              name: Build Fresh Slate Static Files
+              no_output_timeout: 30m
+              command: cd ./src/Slate-API-Explorer-Reference/slate && bundle install && bundle exec middleman build
       - run:
           name: Move Static Files Back To Dev Center
-          command: pipenv run python ./z_slate-to-dc-file-transfer.py
+          command: ./z_slate-to-dc-file-transfer.py
       - run:
           name: install dependencies
           command: |
@@ -110,17 +53,20 @@ jobs:
       - run:
           name: Bundle Install
           command: bundle check || bundle install
-      
+      - save_cache:
+          key: rubygems-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run:
           name: Jekyll build
           command: bundle exec jekyll build
       #- run:
        #   name: HTMLProofer tests
-       #   command: |
-       #     bundle exec htmlproofer ./_site \
-       #     --allow-hash-href \
-       #     --check-html \
-       #     --disable-external
+        #  command: |
+         #   bundle exec htmlproofer ./_site \
+          #  --allow-hash-href \
+           # --check-html \
+            #--disable-external
       - persist_to_workspace:
           root: ./
           paths:
@@ -147,16 +93,14 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - ae:1c:2e:e6:c6:5d:0b:1e:75:ec:2a:59:84:85:9d:41
-workflows:
+workflows:         
   version: 2
   test-deploy:
     jobs:
-      - my-job
-      - my-job2
-      - my-job3
+      - build
       - deploy:
           requires:
-            - my-job
+            - build
           filters:
             branches:
               only: main
