@@ -20,7 +20,7 @@ jobs:
       - run: pipenv install Unipath
       - run:
           name: Widdershins
-          command:  cd ./src/api-explorer/ && for g in *.json; do   widdershins $g -o $g.md; done
+          command:  cd ./src/api-explorer/v3-0/ && for g in *.json; do   widdershins $g -o $g.md; done
 
           #command: pipenv run python ./z_widdershins_recursive.py
           #command: chmod +x ./build/widdershins.sh
