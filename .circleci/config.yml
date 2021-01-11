@@ -21,7 +21,8 @@ jobs:
       - run:
           name: Widdershins
           #command: For /R src/api-explorer/ %G IN "(*.json)" do widdershins %G -o %G.md
-          command: pipenv run python ./z_widdershins_recursive.py
+          #command: pipenv run python ./z_widdershins_recursive.py
+          command: ./build/widdershins.sh
       - run:
           name: Add Underscore V3.0
           command: pipenv run python ./src/api-explorer/v3-0/z_underscore_v3_0.py
