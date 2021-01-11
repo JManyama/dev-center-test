@@ -20,7 +20,7 @@ jobs:
       - run: pipenv install Unipath
       - run:
           name: Widdershins
-          command: For /R src/api-explorer/ %G IN (*.json) do widdershins %G -o %G.md
+          command: For /R src/api-explorer/ %G IN "(*.json)" do widdershins %G -o %G.md
           #command: pipenv run python ./z_widdershins_recursive.py
       - run:
           name: Add Underscore V3.0
