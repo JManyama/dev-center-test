@@ -18,7 +18,7 @@ jobs:
       - run: sudo pip3 install pipenv 
       - run: pipenv install
       - run: pipenv install Unipath
-      #- run:
+      - run:
           name: Widdershins
           command: pipenv run python ./z_widdershins_recursive.py
       - run:
