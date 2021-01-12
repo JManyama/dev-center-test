@@ -1,5 +1,6 @@
 from unipath import Path
 import fileinput
+import time
 
 # CircleCI will run this script 7th (second to last)
 
@@ -235,6 +236,12 @@ def retainV4_0Dropdown():
         last_file.write("# Version 4.0")
         print("Retained V4.0 Folder Drop-down")
         
+        
+def waitAMoment():
+    time.sleep(10)
+    print("Okay to proceed to Building Static Files Now!")
+    
+        
     
         
 def main():
@@ -242,6 +249,7 @@ def main():
     retainV3_1Dropdown()
     retainV3_2Dropdown()
     retainV4_0Dropdown()
+    waitAMoment()
     
     
     
