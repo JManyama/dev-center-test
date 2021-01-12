@@ -238,8 +238,8 @@ def retainV4_0Dropdown():
         
         
 def waitAMoment():
-    time.sleep(10)
-    print("Okay to proceed to Building Static Files Now!")
+    time.sleep(30)
+    print("Waiting for file to update before moving to next command.")
     
         
     
