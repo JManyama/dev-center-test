@@ -246,8 +246,11 @@ def waitAMoment():
         
 def main():
     updateTagsAndRemoveAuth()
+    waitAMoment()
     retainV3_1Dropdown()
+    waitAMoment()
     retainV3_2Dropdown()
+    waitAMoment()
     retainV4_0Dropdown()
     waitAMoment()
     
