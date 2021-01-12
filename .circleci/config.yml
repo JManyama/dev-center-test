@@ -19,7 +19,7 @@ jobs:
       - run: pipenv install
       - run: pipenv install Unipath
       - run:
-          name: Widdershins
+          name: Widdershins Install and Execution
           command: |
                 sudo npm install -g widdershins
                 cd ./src/api-explorer/ && find . -name \*.json -type f -exec widdershins \{\} -o \{\}.md \;
