@@ -23,8 +23,6 @@ jobs:
           command: |
                 sudo npm install -g widdershins
                 cd ./src/api-explorer/ && find . -name \*.json -type f -exec widdershins \{\} -o \{\}.md \;
-
-          #command: pipenv run python ./z_widdershins_recursive.py
        
       - run:
           name: Add Underscore V3.0
