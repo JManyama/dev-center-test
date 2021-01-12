@@ -24,7 +24,7 @@ v3_0 = Path(r"./src/api-explorer/v3-0")
 #Add "_" to the beginning of every markdown file that does not have it
 for markdown in v3_0.listdir():
     #os.path.join(v3_0, markdown)
-    print(markdown)
+    #print(markdown)
     if "_" not in markdown:
         new_name = "_" + markdown        
         os.rename(markdown, new_name)
