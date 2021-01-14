@@ -3,10 +3,10 @@
   <channel>
     <title>SAP Concur Developer Center</title>
     <description>Concur docs provides comprehensive information on working with the Concur platform</description>
-    <link>http://localhost:4000/dev-center-tests/</link>
-    <atom:link href="http://localhost:4000/dev-center-tests/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 14 Jan 2021 09:17:54 -0800</pubDate>
-    <lastBuildDate>Thu, 14 Jan 2021 09:17:54 -0800</lastBuildDate>
+    <link>http://localhost:4000/dev-center-test/</link>
+    <atom:link href="http://localhost:4000/dev-center-test/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 14 Jan 2021 09:58:14 -0800</pubDate>
+    <lastBuildDate>Thu, 14 Jan 2021 09:58:14 -0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
   </channel>
