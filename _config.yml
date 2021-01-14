@@ -8,7 +8,7 @@ twitter_username: concurapi
 github_username:  concur
 repository_url: "https://github.com/concur/developer.concur.com/blob/preview/src/"
 
-# Build settings.
+# Build settings
 kramdown:
   input: GFM
 
